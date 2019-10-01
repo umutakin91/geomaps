@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
     id 'checkstyle'
+    id 'findbugs'
 }
 
 group = 'com.example.broadcom'
@@ -36,4 +37,20 @@ checkstyleMain {
 }
 checkstyleTest {
     source = 'src/test/java'
+}
+
+// FindBugs configuration
+findbugs {
+    ignoreFailures = false
+    toolVersion = "3.0.1"
+    sourceSets=[sourceSets.main]
+    excludeFilter = file("config/findbugs/excludeFilter.xml")
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = "max"
+}
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
 }
