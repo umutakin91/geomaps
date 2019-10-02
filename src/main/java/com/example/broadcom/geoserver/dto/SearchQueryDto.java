@@ -1,6 +1,8 @@
 package com.example.broadcom.geoserver.dto;
 
-public class SearchQueryDto {
+import java.io.Serializable;
+
+public class SearchQueryDto implements Serializable {
 
     String query;
 
