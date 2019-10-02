@@ -17,7 +17,27 @@
 
     <h1>Result</h1>
 
-    <p th:text="'Search Query: ' + ${searchInput.query}"></p>
+    <p th:text="'Search Results For: ' + ${searchInput.query}"></p>
+
+    <table>
+        <thead>
+        <tr>
+            <th th:text="'Name'">Name</th>
+            <th th:text="'Country Name'">Country Name</th>
+            <th th:text="'Latitude'">Latitude</th>
+            <th th:text="'Longitude'">Longitude</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="geoname: ${searchResult.geonames}">
+            <td th:text="${geoname.name}">Ankara</td>
+            <td th:text="${geoname.countryName}">Turkey</td>
+            <td th:text="${geoname.lat}">3.12</td>
+            <td th:text="${geoname.lng}">5.15</td>
+        </tr>
+        </tbody>
+    </table>
+
     <a href="/">Submit another Search</a>
 
 
