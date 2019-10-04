@@ -6,8 +6,6 @@
 
     <title>Geomaps</title>
 
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 
 </head>
 
@@ -16,6 +14,13 @@
 <main role="main" class="container">
 
     <h1>Result</h1>
+
+    <iframe id="resultMap"
+            width="600"
+            height="450"
+            frameborder="0"
+            style="border:0"
+            src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBXPycqNynAMcPeocv7QuyIrkhj32nxrto&center=-33.8569,151.2152&zoom=18" allowfullscreen></iframe>
 
     <p th:text="'Search Results For: ' + ${searchInput.query}"></p>
 
@@ -30,7 +35,14 @@
         </thead>
         <tbody>
         <tr th:each="geoname: ${searchResult.geonames}">
-            <td th:text="${geoname.name}">Ankara</td>
+            <td>
+                <a href="javascript:void(0);"
+                   class="city-link"
+                   th:attr="data-lat=${geoname.lat},data-lng=${geoname.lng}"
+                   data-lat="41.25"
+                   data-lng="27.25"
+                   th:text="${geoname.name}">Ankara</a>
+            </td>
             <td th:text="${geoname.countryName}">Turkey</td>
             <td th:text="${geoname.lat}">3.12</td>
             <td th:text="${geoname.lng}">5.15</td>
@@ -42,8 +54,9 @@
 
 
 </main>
-<!-- /.container -->
 
-<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/geoserver.js}"></script>
+
 </body>
 </html>
