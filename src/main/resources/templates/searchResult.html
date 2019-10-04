@@ -20,36 +20,45 @@
             height="450"
             frameborder="0"
             style="border:0"
-            src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBXPycqNynAMcPeocv7QuyIrkhj32nxrto&center=-33.8569,151.2152&zoom=18" allowfullscreen></iframe>
+            src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBXPycqNynAMcPeocv7QuyIrkhj32nxrto&center=-33.8569,151.2152&zoom=18"
+            allowfullscreen></iframe>
 
     <p th:text="'Search Results For: ' + ${searchInput.q}"></p>
 
-    <table>
-        <thead>
-        <tr>
-            <th th:text="'Name'">Name</th>
-            <th th:text="'Country Name'">Country Name</th>
-            <th th:text="'Latitude'">Latitude</th>
-            <th th:text="'Longitude'">Longitude</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="geoname: ${searchResult.geonames}">
-            <td>
-                <a href="javascript:void(0);"
-                   class="city-link"
-                   th:attr="data-lat=${geoname.lat},data-lng=${geoname.lng}"
-                   data-lat="41.25"
-                   data-lng="27.25"
-                   th:text="${geoname.name}">Ankara</a>
-            </td>
-            <td th:text="${geoname.countryName}">Turkey</td>
-            <td th:text="${geoname.lat}">3.12</td>
-            <td th:text="${geoname.lng}">5.15</td>
-        </tr>
-        </tbody>
-    </table>
+    <span th:if="${searchResult.totalResultsCount == null or  searchResult.totalResultsCount == 0}" th:remove="tag">
 
+        <div class="empty-result">No result found. </div>
+
+    </span>
+    <span th:if="${searchResult.totalResultsCount != null and  searchResult.totalResultsCount != 0}" th:remove="tag">
+    <div class="result-table">
+        <table>
+            <thead>
+            <tr>
+                <th th:text="'Name'">Name</th>
+                <th th:text="'Country Name'">Country Name</th>
+                <th th:text="'Latitude'">Latitude</th>
+                <th th:text="'Longitude'">Longitude</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="geoname: ${searchResult.geonames}">
+                <td>
+                    <a href="javascript:void(0);"
+                       class="city-link"
+                       th:attr="data-lat=${geoname.lat},data-lng=${geoname.lng}"
+                       data-lat="41.25"
+                       data-lng="27.25"
+                       th:text="${geoname.name}">Ankara</a>
+                </td>
+                <td th:text="${geoname.countryName}">Turkey</td>
+                <td th:text="${geoname.lat}">3.12</td>
+                <td th:text="${geoname.lng}">5.15</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </span>
     <a href="/">Submit another Search</a>
 
 
