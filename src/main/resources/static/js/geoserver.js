@@ -9,4 +9,20 @@ $( document ).ready(function() {
         $("#resultMap").attr("src", mapUrl);
     });
 
+
+    $(document).on("click","#more-options-button",function() {
+
+        console.log("CLICK");
+        togglePanelFunction();
+    });
+
 });
+
+function togglePanelFunction() {
+    var x = document.getElementById("more-options-div");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}

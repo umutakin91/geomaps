@@ -22,6 +22,20 @@
         <p>
             Name: <input type="text" th:field="*{q}">
         </p>
+
+        <button id="more-options-button" type="button">More options</button>
+        <div id="more-options-div" style="display: none;">
+
+            <label>Language</label>
+            <select th:field="*{lang}">
+
+                <option th:each="language : ${languages}"
+                        th:value="${language}"
+                        th:text="${language}"/>
+            </select>
+
+        </div>
+
         <p>
             <input type="submit" value="Submit"/> <input type="reset" value="Reset">
         </p>
@@ -30,4 +44,7 @@
 </main>
 
 </body>
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/geoserver.js}"></script>
 </html>

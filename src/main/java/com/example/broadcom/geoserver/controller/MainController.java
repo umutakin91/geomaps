@@ -20,6 +20,7 @@ public class MainController {
     public String main(Model model,SearchQueryDto searchInput) {
 
         model.addAttribute("searchInput" , searchInput);
+        model.addAttribute("languages", geoNamesService.getLanguages());
         return "welcome"; //view
     }
 
