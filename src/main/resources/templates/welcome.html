@@ -24,7 +24,7 @@
 
     <form action="#" th:action="@{/search}" th:object="${searchInput}" method="post">
         <p>
-            Name: <input type="text" th:field="*{query}">
+            Name: <input type="text" th:field="*{q}">
         </p>
         <p>
             <input type="submit" value="Submit"/> <input type="reset" value="Reset">
@@ -32,8 +32,6 @@
     </form>
 
 </main>
-<!-- /.container -->
 
-<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 </body>
 </html>
