@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class SearchQueryDto implements Serializable {
 
     String q;
+    String lang;
 
     public String getQ() {
         return q;
@@ -14,10 +15,19 @@ public class SearchQueryDto implements Serializable {
         this.q = q;
     }
 
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
     @Override
     public String toString() {
         return "SearchQueryDto{" +
                 "q='" + q + '\'' +
+                ", lang='" + lang + '\'' +
                 '}';
     }
 }
