@@ -19,6 +19,18 @@ public class GeoNamesServiceImpl implements GeoNamesService {
     @Value("${geonames.ws.url.search}")
     private String geoNamesServiceUrl;
 
+    @Value("${geonames.ws.username}")
+    private String username;
+
+    @Value("${geonames.ws.style}")
+    private String style;
+
+    @Value("${geonames.ws.maxRows}")
+    private String maxRows;
+
+    @Value("${geonames.ws.formatted}")
+    private Boolean formatted;
+
     @Value("#{'${geonames.ws.languages}'.split(',')}")
     private List<String> languageList;
 
@@ -32,6 +44,10 @@ public class GeoNamesServiceImpl implements GeoNamesService {
         String uri= UriComponentsBuilder.fromUriString(geoNamesServiceUrl)
                 .queryParam("q", searchQueryDto.getQ())
                 .queryParam("lang", searchQueryDto.getLang())
+                .queryParam("username", username)
+                .queryParam("style", style)
+                .queryParam("maxRows", maxRows)
+                .queryParam("formatted", formatted)
                 .buildAndExpand()
                 .toUriString();
 
