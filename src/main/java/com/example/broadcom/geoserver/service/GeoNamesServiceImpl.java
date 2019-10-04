@@ -1,5 +1,7 @@
 package com.example.broadcom.geoserver.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +19,9 @@ public class GeoNamesServiceImpl implements GeoNamesService {
     @Value("${geonames.ws.url.search}")
     private String geoNamesServiceUrl;
 
+    @Value("#{'${geonames.ws.languages}'.split(',')}")
+    private List<String> languageList;
+
     @Autowired
     @Qualifier(value = "geonamesRestClient")
     private RestClient restClient;
@@ -26,6 +31,7 @@ public class GeoNamesServiceImpl implements GeoNamesService {
 
         String uri= UriComponentsBuilder.fromUriString(geoNamesServiceUrl)
                 .queryParam("q", searchQueryDto.getQ())
+                .queryParam("lang", searchQueryDto.getLang())
                 .buildAndExpand()
                 .toUriString();
 
@@ -33,5 +39,10 @@ public class GeoNamesServiceImpl implements GeoNamesService {
         SearchResult searchResult = result.getBody();
 
         return searchResult;
+    }
+
+    @Override
+    public List<String> getLanguages() {
+        return languageList;
     }
 }
