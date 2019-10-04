@@ -4,20 +4,20 @@ import java.io.Serializable;
 
 public class SearchQueryDto implements Serializable {
 
-    String query;
+    String q;
 
-    public String getQuery() {
-        return query;
+    public String getQ() {
+        return q;
     }
 
-    public void setQuery(String query) {
-        this.query = query;
+    public void setQ(String q) {
+        this.q = q;
     }
 
     @Override
     public String toString() {
         return "SearchQueryDto{" +
-                "query='" + query + '\'' +
+                "q='" + q + '\'' +
                 '}';
     }
 }
