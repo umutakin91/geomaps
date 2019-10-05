@@ -24,6 +24,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.google.code.findbugs:annotations:3.0.1'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -50,7 +51,7 @@ findbugs {
 }
 tasks.withType(FindBugs) {
     reports {
-        xml.enabled true
+        xml.enabled false
         html.enabled true
     }
 }

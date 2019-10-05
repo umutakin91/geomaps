@@ -30,7 +30,7 @@ public class RestDefaultClientImpl implements RestClient {
 
     @Override
     public <T> ResponseEntity<? extends T> get(String url,
-                                               @Nullable HttpHeaders headers,
+                                               HttpHeaders headers,
                                                Class<? extends T> resultType)
             throws RestClientException {
         return restTemplate.exchange(url,

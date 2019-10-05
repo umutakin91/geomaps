@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 import com.example.broadcom.geonames.ws.model.SearchResult;
 import com.example.broadcom.geoserver.dto.SearchQueryDto;
+import com.example.broadcom.geoserver.exception.NotFoundException;
 import com.example.broadcom.geoserver.ws.rest.RestClient;
 
 /**
@@ -51,6 +52,9 @@ public class GeoNamesServiceImpl implements GeoNamesService {
         ResponseEntity<? extends SearchResult> result = restClient.get(uri, SearchResult.class);
         SearchResult searchResult = result.getBody();
 
+        if ( searchResult == null ) {
+            throw new NotFoundException();
+        }
         setPrevAndNextStartRow(searchQueryDto, searchResult);
 
         return searchResult;
