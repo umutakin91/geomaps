@@ -43,15 +43,7 @@ public class GeoNamesServiceImpl implements GeoNamesService {
     @Override
     public SearchResult search(SearchQueryDto searchQueryDto) {
 
-        String uri= UriComponentsBuilder.fromUriString(geoNamesServiceUrl)
-                .queryParam("q", searchQueryDto.getQ())
-                .queryParam("lang", searchQueryDto.getLang())
-                .queryParam("username", username)
-                .queryParam("style", style)
-                .queryParam("maxRows", maxRows)
-                .queryParam("formatted", formatted)
-                .buildAndExpand()
-                .toUriString();
+        String uri= prepareGeoNamesUrl(searchQueryDto);
 
         ResponseEntity<? extends SearchResult> result = restClient.get(uri, SearchResult.class);
         SearchResult searchResult = result.getBody();
@@ -62,5 +54,18 @@ public class GeoNamesServiceImpl implements GeoNamesService {
     @Override
     public List<String> getLanguages() {
         return languageList;
+    }
+
+    private String prepareGeoNamesUrl(SearchQueryDto searchQueryDto) {
+        return UriComponentsBuilder.fromUriString(geoNamesServiceUrl)
+                .queryParam("q", searchQueryDto.getQ())
+                .queryParam("lang", searchQueryDto.getLang())
+                .queryParam("username", username)
+                .queryParam("style", style)
+                .queryParam("maxRows", maxRows)
+                .queryParam("formatted", formatted)
+                .buildAndExpand()
+                .toUriString();
+
     }
 }
