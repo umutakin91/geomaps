@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * Spring Boot main test class
+ * Spring Boot main test class.
  *
  * @author Umut AKIN
  */
