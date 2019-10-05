@@ -65,6 +65,10 @@ public class GeoNamesServiceImpl implements GeoNamesService {
         searchResult.setNextStartRow((totalResultCount > startRow + maxRows)
                 ? (startRow + maxRows)
                 : null);
+
+        searchResult.setPrevStartRow((startRow - maxRows < 0)
+                ? null
+                : (startRow - maxRows));
     }
 
     private String prepareGeoNamesUrl(SearchQueryDto searchQueryDto) {

@@ -58,7 +58,18 @@
             </tbody>
         </table>
 
-        <div th:if="${searchResult.nextStartRow}">
+        <div th:if="${searchResult.prevStartRow != null}">
+            PREV
+            <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
+                <input type="hidden" th:field="*{q}"/>
+                <input type="hidden" th:field="*{lang}"/>
+                <input type="hidden" id="startRow" name="startRow" th:value="${searchResult.prevStartRow}"/>
+                <button type="submit" value="Submit"> Go previous </button>
+
+            </form>
+        </div>
+
+        <div th:if="${searchResult.nextStartRow != null}">
             <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
                 <input type="hidden" th:field="*{q}"/>
                 <input type="hidden" th:field="*{lang}"/>
