@@ -21,6 +21,7 @@
     <form action="#" th:action="@{/search}" th:object="${searchInput}" method="post">
         <p>
             Name: <input type="text" th:field="*{q}">
+            <span th:if="${#fields.hasErrors('q')}" th:errors="*{q}">Name Error</span>
         </p>
 
         <button id="more-options-button" type="button">More options</button>

@@ -2,8 +2,11 @@ package com.example.broadcom.geoserver.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 public class SearchQueryDto implements Serializable {
 
+    @NotBlank(message = "Search Parameter Should Not Be Blank")
     String q;
     String lang;
 
