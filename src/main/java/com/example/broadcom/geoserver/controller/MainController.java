@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.RestClientException;
 
 import com.example.broadcom.geonames.ws.model.SearchResult;
 import com.example.broadcom.geoserver.dto.SearchQueryDto;
@@ -26,33 +25,34 @@ public class MainController {
     @Autowired
     private GeoNamesService geoNamesService;
 
-    @GetMapping("/")
-    public String main(Model model, SearchQueryDto searchInput) {
+    @GetMapping("/search")
+    public String searchGet(Model model, @ModelAttribute("searchQueryDto") SearchQueryDto searchQueryDto) {
 
-        model.addAttribute("searchInput" , searchInput);
+        model.addAttribute("searchQueryDto" , searchQueryDto);
         model.addAttribute("languages", geoNamesService.getLanguages());
         return "welcome"; //view
     }
 
-    @PostMapping("/")
-    public String search(Model model, @ModelAttribute("searchInput") @Valid SearchQueryDto searchInput, BindingResult bingBindingResult) {
+    @PostMapping("/search")
+    public String searchPost(Model model, @ModelAttribute("searchQueryDto") @Valid SearchQueryDto searchQueryDto,
+                         BindingResult bindingResult) {
 
-        if (bingBindingResult.hasErrors()){
+        if (bindingResult.hasErrors()){
             model.addAttribute("languages", geoNamesService.getLanguages());
             return "welcome";
         }
 
-        logSearch(searchInput);
+        logSearch(searchQueryDto);
 
-        SearchResult searchResult = geoNamesService.search(searchInput);
-        model.addAttribute("searchInput", searchInput);
+        SearchResult searchResult = geoNamesService.search(searchQueryDto);
+        model.addAttribute("searchQueryDto", searchQueryDto);
         model.addAttribute("searchResult", searchResult);
         return "searchResult"; //view
     }
 
-    private void logSearch(SearchQueryDto searchInput) {
+    private void logSearch(SearchQueryDto searchQueryDto) {
         LOGGER.info("Request received to search query, q = [{}] , lang = [{}]",
-                searchInput.getQ(),
-                searchInput.getLang());
+                searchQueryDto.getQ(),
+                searchQueryDto.getLang());
     }
 }
