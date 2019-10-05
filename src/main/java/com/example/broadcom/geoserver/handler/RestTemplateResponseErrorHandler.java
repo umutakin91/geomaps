@@ -1,15 +1,18 @@
 package com.example.broadcom.geoserver.handler;
 
-import java.io.IOException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResponseErrorHandler;
-
+import java.io.IOException;
 import com.example.broadcom.geoserver.exception.NotFoundException;
 
+/**
+ * Rest error handler.
+ *
+ * @author Umut AKIN
+ */
 @Component
 public class RestTemplateResponseErrorHandler
         implements ResponseErrorHandler {

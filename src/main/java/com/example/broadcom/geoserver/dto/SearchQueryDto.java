@@ -1,9 +1,13 @@
 package com.example.broadcom.geoserver.dto;
 
 import java.io.Serializable;
-
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Search Dto that is used to create search parameters for geonames rest api.
+ *
+ * @author Umut AKIN
+ */
 public class SearchQueryDto implements Serializable {
 
     @NotBlank(message = "Search Parameter Should Not Be Blank")

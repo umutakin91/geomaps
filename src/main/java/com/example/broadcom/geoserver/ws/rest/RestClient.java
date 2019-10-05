@@ -12,8 +12,13 @@ import org.springframework.web.client.RestClientException;
  */
 public interface RestClient {
 
-    <T> ResponseEntity<? extends T> get(String url, HttpHeaders headers, Class<? extends T> resultType) throws RestClientException;
+    <T> ResponseEntity<? extends T> get(String url,
+                                        HttpHeaders headers,
+                                        Class<? extends T> resultType)
+            throws RestClientException;
 
-    <T> ResponseEntity<? extends T> get(String url, Class<? extends T> resultType) throws RestClientException;
+    <T> ResponseEntity<? extends T> get(String url,
+                                        Class<? extends T> resultType)
+            throws RestClientException;
 
 }

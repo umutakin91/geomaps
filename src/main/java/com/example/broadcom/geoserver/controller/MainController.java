@@ -1,7 +1,5 @@
 package com.example.broadcom.geoserver.controller;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +9,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import javax.validation.Valid;
 import com.example.broadcom.geonames.ws.model.SearchResult;
 import com.example.broadcom.geoserver.dto.SearchQueryDto;
 import com.example.broadcom.geoserver.service.GeoNamesService;
 import com.example.broadcom.geoserver.ws.rest.RestDefaultClientImpl;
 
+/**
+ * Main Controller class.
+ *
+ * @author Umut AKIN
+ */
 @Controller
 public class MainController {
 
@@ -31,7 +34,8 @@ public class MainController {
     }
 
     @GetMapping("/search")
-    public String searchGet(Model model, @ModelAttribute("searchQueryDto") SearchQueryDto searchQueryDto) {
+    public String searchGet(Model model,
+                            @ModelAttribute("searchQueryDto") SearchQueryDto searchQueryDto) {
 
         model.addAttribute("searchQueryDto" , searchQueryDto);
         model.addAttribute("languages", geoNamesService.getLanguages());
@@ -39,8 +43,9 @@ public class MainController {
     }
 
     @PostMapping("/search")
-    public String searchPost(Model model, @ModelAttribute("searchQueryDto") @Valid SearchQueryDto searchQueryDto,
-                         BindingResult bindingResult) {
+    public String searchPost(Model model,
+                @ModelAttribute("searchQueryDto") @Valid SearchQueryDto searchQueryDto,
+                BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()){
             model.addAttribute("languages", geoNamesService.getLanguages());

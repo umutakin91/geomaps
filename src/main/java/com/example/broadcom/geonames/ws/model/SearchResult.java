@@ -2,9 +2,13 @@ package com.example.broadcom.geonames.ws.model;
 
 import java.io.Serializable;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * model object to be used for geonames rest api.
+ *
+ * @author Umut AKIN
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResult implements Serializable {
 

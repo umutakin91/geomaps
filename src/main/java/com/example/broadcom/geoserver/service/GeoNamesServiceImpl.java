@@ -1,7 +1,5 @@
 package com.example.broadcom.geoserver.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,11 +7,16 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
-
+import java.util.List;
 import com.example.broadcom.geonames.ws.model.SearchResult;
 import com.example.broadcom.geoserver.dto.SearchQueryDto;
 import com.example.broadcom.geoserver.ws.rest.RestClient;
 
+/**
+ * Service implementation for geonames rest api.
+ *
+ * @author Umut AKIN
+ */
 @Service
 public class GeoNamesServiceImpl implements GeoNamesService {
 
@@ -43,7 +46,7 @@ public class GeoNamesServiceImpl implements GeoNamesService {
     @Override
     public SearchResult search(SearchQueryDto searchQueryDto) {
 
-        String uri= prepareGeoNamesUrl(searchQueryDto);
+        String uri = prepareGeoNamesUrl(searchQueryDto);
 
         ResponseEntity<? extends SearchResult> result = restClient.get(uri, SearchResult.class);
         SearchResult searchResult = result.getBody();

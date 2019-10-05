@@ -10,6 +10,13 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Rest client implementation for general purpose.
+ * It makes a get call to the provided url and
+ * Returns provided model.
+ *
+ * @author Umut AKIN
+ */
 public class RestDefaultClientImpl implements RestClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RestDefaultClientImpl.class);
@@ -22,12 +29,20 @@ public class RestDefaultClientImpl implements RestClient {
     }
 
     @Override
-    public <T> ResponseEntity<? extends T> get(String url, @Nullable HttpHeaders headers, Class<? extends T> resultType) throws RestClientException {
-        return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), resultType);
+    public <T> ResponseEntity<? extends T> get(String url,
+                                               @Nullable HttpHeaders headers,
+                                               Class<? extends T> resultType)
+            throws RestClientException {
+        return restTemplate.exchange(url,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                resultType);
     }
 
     @Override
-    public <T> ResponseEntity<? extends T> get(String url, Class<? extends T> resultType) throws RestClientException {
+    public <T> ResponseEntity<? extends T> get(String url,
+                                               Class<? extends T> resultType)
+            throws RestClientException {
         try {
             return this.get(url, HttpHeaders.EMPTY, resultType);
         } catch (RestClientException e) {
