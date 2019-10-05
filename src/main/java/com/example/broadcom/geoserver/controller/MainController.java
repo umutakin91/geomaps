@@ -25,6 +25,11 @@ public class MainController {
     @Autowired
     private GeoNamesService geoNamesService;
 
+    @GetMapping("/")
+    public String indexPage() {
+        return "index";
+    }
+
     @GetMapping("/search")
     public String searchGet(Model model, @ModelAttribute("searchQueryDto") SearchQueryDto searchQueryDto) {
 
