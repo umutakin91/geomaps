@@ -35,7 +35,7 @@ public class MainController {
 
         model.addAttribute("searchQueryDto" , searchQueryDto);
         model.addAttribute("languages", geoNamesService.getLanguages());
-        return "welcome"; //view
+        return "search"; //view
     }
 
     @PostMapping("/search")
@@ -44,7 +44,7 @@ public class MainController {
 
         if (bindingResult.hasErrors()){
             model.addAttribute("languages", geoNamesService.getLanguages());
-            return "welcome";
+            return "search";
         }
 
         logSearch(searchQueryDto);
