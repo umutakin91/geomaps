@@ -18,7 +18,7 @@
         </h2>
     </div>
 
-    <form action="#" th:action="@{/}" th:object="${searchInput}" method="post">
+    <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
         <p>
             Name: <input type="text" th:field="*{q}">
             <span th:if="${#fields.hasErrors('q')}" th:errors="*{q}">Name Error</span>
