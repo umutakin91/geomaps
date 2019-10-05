@@ -27,7 +27,7 @@ public class GeoNamesServiceImpl implements GeoNamesService {
     private String style;
 
     @Value("${geonames.ws.maxRows}")
-    private String maxRows;
+    private Integer maxRows;
 
     @Value("${geonames.ws.formatted}")
     private Boolean formatted;
@@ -48,12 +48,23 @@ public class GeoNamesServiceImpl implements GeoNamesService {
         ResponseEntity<? extends SearchResult> result = restClient.get(uri, SearchResult.class);
         SearchResult searchResult = result.getBody();
 
+        setPrevAndNextStartRow(searchQueryDto, searchResult);
+
         return searchResult;
     }
 
     @Override
     public List<String> getLanguages() {
         return languageList;
+    }
+
+    private void setPrevAndNextStartRow(SearchQueryDto searchQueryDto, SearchResult searchResult) {
+        //searchResult.setPrevStartRow();
+        int totalResultCount = searchResult.getTotalResultsCount();
+        int startRow = searchQueryDto.getStartRow();
+        searchResult.setNextStartRow((totalResultCount > startRow + maxRows)
+                ? (startRow + maxRows)
+                : null);
     }
 
     private String prepareGeoNamesUrl(SearchQueryDto searchQueryDto) {
