@@ -1,93 +1,112 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Geomaps</title>
+<head th:replace="base/head::head"></head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav th:replace="base/nav::nav">
+
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="form-group">
+                <h2>Map</h2>
+            </div>
+            <div class="form-group">
+                <iframe id="resultMap"
+                        width="600"
+                        height="450"
+                        frameborder="0"
+                        style="border:0"
+                        src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBXPycqNynAMcPeocv7QuyIrkhj32nxrto&center=-33.8569,151.2152&zoom=18"
+                        allowfullscreen></iframe>
+            </div>
+            <div class="form-group">
+                <h3 th:text="'Showing Results For: &quot;' + ${searchQueryDto.q} + '&quot;'"></h3>
+            </div>
+            <div class="form-group" th:if="${searchResult.totalResultsCount == null or searchResult.totalResultsCount == 0}">
+
+                <p class="empty-result">No result found. </p>
+
+            </div>
+            <div class="form-group" th:if="${searchResult.totalResultsCount != null and searchResult.totalResultsCount != 0}">
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" th:text="'#'">#</th>
+                        <th scope="col" ><span class="float-left" th:text="'Name'">Name</span></th>
+                        <th scope="col" th:text="'Country Name'">Country Name</th>
+                        <th scope="col" th:text="'Latitude'">Latitude</th>
+                        <th scope="col" th:text="'Longitude'">Longitude</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="geoname,iter: ${searchResult.geonames}">
+                        <td th:text="${iter.index}"></td>
+                        <td>
+                            <a href="javascript:void(0);"
+                               class="city-link float-left"
+                               th:attr="data-lat=${geoname.lat},data-lng=${geoname.lng}"
+                               data-lat="41.25"
+                               data-lng="27.25"
+                               th:text="${geoname.name}">Ankara</a>
+                        </td>
+                        <td th:text="${geoname.countryName}">Turkey</td>
+                        <td th:text="${geoname.lat}">3.12</td>
+                        <td th:text="${geoname.lng}">5.15</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div th:if="${searchResult.prevStartRow != null}">
+                            <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
+                                <input type="hidden" th:field="*{q}"/>
+                                <input type="hidden" th:field="*{lang}"/>
+                                <input type="hidden" id="startRow" name="startRow" th:value="${searchResult.prevStartRow}"/>
+                                <button class="btn btn-link" type="submit" value="Submit"> Go previous </button>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <div th:if="${searchResult.nextStartRow != null}">
+                            <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
+                                <input type="hidden" th:field="*{q}"/>
+                                <input type="hidden" th:field="*{lang}"/>
+                                <input type="hidden" id="startRow" name="startRow" th:value="${searchResult.nextStartRow}"/>
+                                <button class="btn btn-link" type="submit" value="Submit"> Go next </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-</head>
-
-<body>
-
-<main role="main" class="container">
-
-    <h1>Result</h1>
-
-    <iframe id="resultMap"
-            width="600"
-            height="450"
-            frameborder="0"
-            style="border:0"
-            src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBXPycqNynAMcPeocv7QuyIrkhj32nxrto&center=-33.8569,151.2152&zoom=18"
-            allowfullscreen></iframe>
-
-    <p th:text="'Search Results For: ' + ${searchQueryDto.q}"></p>
-
-    <span th:if="${searchResult.totalResultsCount == null or  searchResult.totalResultsCount == 0}" th:remove="tag">
-
-        <div class="empty-result">No result found. </div>
-
-    </span>
-    <span th:if="${searchResult.totalResultsCount != null and  searchResult.totalResultsCount != 0}" th:remove="tag">
-    <div class="result-table">
-        <table>
-            <thead>
-            <tr>
-                <th th:text="'Name'">Name</th>
-                <th th:text="'Country Name'">Country Name</th>
-                <th th:text="'Latitude'">Latitude</th>
-                <th th:text="'Longitude'">Longitude</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="geoname: ${searchResult.geonames}">
-                <td>
-                    <a href="javascript:void(0);"
-                       class="city-link"
-                       th:attr="data-lat=${geoname.lat},data-lng=${geoname.lng}"
-                       data-lat="41.25"
-                       data-lng="27.25"
-                       th:text="${geoname.name}">Ankara</a>
-                </td>
-                <td th:text="${geoname.countryName}">Turkey</td>
-                <td th:text="${geoname.lat}">3.12</td>
-                <td th:text="${geoname.lng}">5.15</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div th:if="${searchResult.prevStartRow != null}">
-            PREV
-            <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
-                <input type="hidden" th:field="*{q}"/>
-                <input type="hidden" th:field="*{lang}"/>
-                <input type="hidden" id="startRow" name="startRow" th:value="${searchResult.prevStartRow}"/>
-                <button type="submit" value="Submit"> Go previous </button>
-
-            </form>
         </div>
-
-        <div th:if="${searchResult.nextStartRow != null}">
-            <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
-                <input type="hidden" th:field="*{q}"/>
-                <input type="hidden" th:field="*{lang}"/>
-                <input type="hidden" id="startRow" name="startRow" th:value="${searchResult.nextStartRow}"/>
-                <button type="submit" value="Submit"> Go next </button>
-
-            </form>
-        </div>
-
     </div>
-    </span>
-    <a href="/search">Submit another search</a>
+</div>
 
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+</footer>
 
-</main>
-
-<script th:src="@{/js/jquery.js}"></script>
-<script th:src="@{/js/geoserver.js}"></script>
+<div th:replace="base/jsfile::jsfile"></div>
 
 </body>
+
 </html>
