@@ -10,7 +10,8 @@ public class SearchResult implements Serializable {
 
     private Integer totalResultsCount;
     private List<GeoNames> geonames;
-
+    private Integer prevStartRow;
+    private Integer nextStartRow;
 
     public Integer getTotalResultsCount() {
         return totalResultsCount;
@@ -28,11 +29,29 @@ public class SearchResult implements Serializable {
         this.geonames = geonames;
     }
 
+    public Integer getPrevStartRow() {
+        return prevStartRow;
+    }
+
+    public void setPrevStartRow(Integer prevStartRow) {
+        this.prevStartRow = prevStartRow;
+    }
+
+    public Integer getNextStartRow() {
+        return nextStartRow;
+    }
+
+    public void setNextStartRow(Integer nextStartRow) {
+        this.nextStartRow = nextStartRow;
+    }
+
     @Override
     public String toString() {
         return "SearchResult{" +
                 "totalResultsCount=" + totalResultsCount +
                 ", geonames=" + geonames +
+                ", prevStartRow=" + prevStartRow +
+                ", nextStartRow=" + nextStartRow +
                 '}';
     }
 }
