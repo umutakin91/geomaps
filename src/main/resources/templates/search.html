@@ -18,6 +18,7 @@
             <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
                 <div class="form-group">
                     <label><h2>Search Geoname</h2></label>
+                    <div th:if="${#fields.hasErrors('q')}" th:errors="*{q}">Query Error</div>
                     <input type="text" class="form-control" th:field="*{q}">
                     <small id="emailHelp" class="form-text text-muted">Write the geographic name that you want to search.</small>
                 </div>
