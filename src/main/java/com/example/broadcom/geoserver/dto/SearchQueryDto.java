@@ -7,8 +7,9 @@ import javax.validation.constraints.NotBlank;
 public class SearchQueryDto implements Serializable {
 
     @NotBlank(message = "Search Parameter Should Not Be Blank")
-    String q;
-    String lang;
+    private String q;
+    private String lang;
+    private Integer startRow = 0;
 
     public String getQ() {
         return q;
@@ -24,6 +25,14 @@ public class SearchQueryDto implements Serializable {
 
     public void setLang(String lang) {
         this.lang = lang;
+    }
+
+    public Integer getStartRow() {
+        return startRow;
+    }
+
+    public void setStartRow(Integer startRow) {
+        this.startRow = startRow;
     }
 
     @Override
