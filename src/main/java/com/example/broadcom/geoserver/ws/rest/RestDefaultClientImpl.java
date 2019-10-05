@@ -1,5 +1,7 @@
 package com.example.broadcom.geoserver.ws.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -10,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class RestDefaultClientImpl implements RestClient {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestDefaultClientImpl.class);
 
     private final RestTemplate restTemplate;
 
@@ -28,9 +31,14 @@ public class RestDefaultClientImpl implements RestClient {
         try {
             return this.get(url, HttpHeaders.EMPTY, resultType);
         } catch (RestClientException e) {
-            // TODO log error.
+            logSocketError(url, e);
             throw e;
         }
+    }
+
+
+    private void logSocketError(String url, RestClientException e) {
+        LOGGER.error("Error when connectiong to the server, URL = [{}]", url, e);
     }
 
 }
