@@ -57,6 +57,17 @@
             </tr>
             </tbody>
         </table>
+
+        <div th:if="${searchResult.nextStartRow}">
+            <form action="#" th:action="@{/search}" th:object="${searchQueryDto}" method="post">
+                <input type="hidden" th:field="*{q}"/>
+                <input type="hidden" th:field="*{lang}"/>
+                <input type="hidden" id="startRow" name="startRow" th:value="${searchResult.nextStartRow}"/>
+                <button type="submit" value="Submit"> Go next </button>
+
+            </form>
+        </div>
+
     </div>
     </span>
     <a href="/search">Submit another search</a>

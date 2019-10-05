@@ -75,6 +75,7 @@ public class GeoNamesServiceImpl implements GeoNamesService {
                 .queryParam("style", style)
                 .queryParam("maxRows", maxRows)
                 .queryParam("formatted", formatted)
+                .queryParam("startRow", searchQueryDto.getStartRow())
                 .buildAndExpand()
                 .toUriString();
 
