@@ -34,7 +34,7 @@ public class MainController {
         return "welcome"; //view
     }
 
-    @PostMapping("/search")
+    @PostMapping("/")
     public String search(Model model, @ModelAttribute("searchInput") @Valid SearchQueryDto searchInput, BindingResult bingBindingResult) {
 
         if (bingBindingResult.hasErrors()){
