@@ -99,6 +99,6 @@ public class GeoNamesServiceUnitTest {
     }
 
     private List<String> getLanguageList() {
-        return Arrays.asList("en","es");
+        return Arrays.asList("en", "es");
     }
 }

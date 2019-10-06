@@ -52,7 +52,7 @@ public class GeoNamesServiceImpl implements GeoNamesService {
         ResponseEntity<? extends SearchResult> result = restClient.get(uri, SearchResult.class);
         SearchResult searchResult = result.getBody();
 
-        if ( searchResult == null ) {
+        if (searchResult == null) {
             throw new NotFoundException();
         }
         setPrevAndNextStartRow(searchQueryDto, searchResult);
