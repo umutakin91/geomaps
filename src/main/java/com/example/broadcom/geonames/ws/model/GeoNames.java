@@ -19,6 +19,8 @@ public class GeoNames implements Serializable {
 
     private String countryName;
 
+    private String fcodeName;
+
 
     public String getLng() {
         return lng;
@@ -52,13 +54,11 @@ public class GeoNames implements Serializable {
         this.countryName = countryName;
     }
 
-    @Override
-    public String toString() {
-        return "GeoNames{" +
-                "lng='" + lng + '\'' +
-                ", lat='" + lat + '\'' +
-                ", name='" + name + '\'' +
-                ", countryName='" + countryName + '\'' +
-                '}';
+    public String getFcodeName() {
+        return fcodeName;
+    }
+
+    public void setFcodeName(String fcodeName) {
+        this.fcodeName = fcodeName;
     }
 }

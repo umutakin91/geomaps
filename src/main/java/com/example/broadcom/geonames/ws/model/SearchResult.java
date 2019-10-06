@@ -48,14 +48,4 @@ public class SearchResult implements Serializable {
     public void setNextStartRow(Integer nextStartRow) {
         this.nextStartRow = nextStartRow;
     }
-
-    @Override
-    public String toString() {
-        return "SearchResult{" +
-                "totalResultsCount=" + totalResultsCount +
-                ", geonames=" + geonames +
-                ", prevStartRow=" + prevStartRow +
-                ", nextStartRow=" + nextStartRow +
-                '}';
-    }
 }

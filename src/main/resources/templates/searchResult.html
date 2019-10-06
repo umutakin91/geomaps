@@ -42,6 +42,7 @@
                         <th scope="col" th:text="'#'">#</th>
                         <th scope="col" ><span class="float-left" th:text="'Name'">Name</span></th>
                         <th scope="col" th:text="'Country Name'">Country Name</th>
+                        <th scope="col" th:text="'Feature class'">Feature class</th>
                         <th scope="col" th:text="'Latitude'">Latitude</th>
                         <th scope="col" th:text="'Longitude'">Longitude</th>
                     </tr>
@@ -58,6 +59,7 @@
                                th:text="${geoname.name}">Ankara</a>
                         </td>
                         <td th:text="${geoname.countryName}">Turkey</td>
+                        <td th:text="${geoname.fcodeName}">capital</td>
                         <td th:text="${geoname.lat}">3.12</td>
                         <td th:text="${geoname.lng}">5.15</td>
                     </tr>
