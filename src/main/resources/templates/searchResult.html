@@ -48,7 +48,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="geoname,iter: ${searchResult.geonames}">
-                        <td th:text="${iter.index}"></td>
+                        <td th:text="${iter.index + 1 + searchQueryDto.startRow}"></td>
                         <td>
                             <a href="javascript:void(0);"
                                class="city-link float-left"
